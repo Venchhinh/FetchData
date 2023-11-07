@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container-fluid{
+    height: 100px;
+    display: flex;
+    background-color: yellowgreen;
+}
+.new-logo{
+    width: 30%;
+    padding: 5px;
+    display: flex;
+}
+.new-logo img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+.new-logo h2{
+    margin-left: 10px;
+    margin-top: 25px;
+}
+.new-menu ul{
+    list-style: none;
+    display: flex;
+}
+.new-menu ul li{
+    padding: 35px;
+    font-size: 20px;
+}
+.new-menu ul li a{
+    text-decoration: none;
+}
+.container{
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    padding: 10px 10px ;
+    background-color: rgb(208, 222, 222);
+    margin-top: 15px;
+}
+.card-body h1{
+    font-size: 20px;
+}
+.card-body h3{
+    font-size: 20px;
+}
