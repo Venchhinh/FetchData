@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script&family=Dosis&family=Kalam:wght@300&family=Noto+Serif+Khmer:wght@300;400&family=Roboto&family=Ubuntu&family=Young+Serif&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+.box-logo{
+    width: 70%;
+    height: 6rem;
+    display: flex;
+}
+.logo{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.logo img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.banner{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.banner img{
+    width: 70%;
+    height: 80px;
+    object-fit: cover;
+}
+.box-navbar{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:rgb(208, 60, 161);
+}
+.box-menu{
+    width: 70%;
+}
+.box-menu ul{
+    display: flex;
+    list-style: none;
+}
+.box-menu ul li#home{
+    background-color: brown;
+}
+.box-menu ul li{
+    padding: 18px 18px;
+}
+.box-menu ul li a{
+    text-decoration: none;
+    color: aliceblue;
+}
