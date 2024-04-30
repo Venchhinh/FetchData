@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- link JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container text-center p-3">
+        <h1>CRUD Operation</h1>
+        <p>C(Create) R(Read) U(Update) D(Delete)</p>
+    </div>
+    <div class="container d-flex justify-content-end mb-5">
+        <!-- Button trigger modal -->
+        <button type="button" id="btn_add" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add +
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <label for="">ID:</label>
+                            <input id="id-txt" type="text" class="form-control mb-3">
+                            <label for="">Name:</label>
+                            <input id="name-txt" type="text" class="form-control mb-3">
+                            <label for="">Gender:</label>
+                            <select name="" id="gender-combo" class="form-select mb-3">
+                                <option hidden value="">Choose Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <label for="">Major:</label>
+                            <input id="major-txt" type="text" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" id="save_change">Save Change</button>
+                        <button id="btn_save" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-hover bg-light  table-stridped" style="table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Major</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="data-tbody">
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    var index=2;
+    const obj=[];
+        obj[0]={
+            id:12,
+            name:"Meng",
+            gender:"Male",
+            major:"CS"
+        };
+        obj[1]={
+            id:23,
+            name:"Chhinh",
+            gender:"Male",
+            major:'CS'
+        };
+    $(document).ready(function(){
+        $('#btn_add').click(function(){
+            $('#btn_update').hide();
+            $('#btn_save').show();
+        });
+        //add data
+        $('#btn_save').click(function(){
+            var id1 = $('#id-txt').val();
+            var name1 = $('#name-txt').val();
+            var gender1 = $("#gender-combo").val();
+            var major1 = $("#major-txt").val();
+
+            // alert(id+name+gender+major);
+            obj[index]={
+                id:id1,
+                name:name1,
+                gender:gender1,
+                major:major1
+            };
+            //getdata into table
+            var str='';
+            for(var i=0;i<obj.length;i++){
+                str+=`
+                <tr>
+                    <td>${obj[i].id}</td> 
+                    <td>${obj[i].name}</td> 
+                    <td>${obj[i].gender}</td> 
+                    <td>${obj[i].major}</td> 
+                    <td>
+                        <button type="button"  id="btn_update" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+                        <button id="btn_delete" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr> 
+                `;
+            }
+            $('#data-tbody').html(str);
+            index++;
+            $('#id-txt').val("");
+            $('#name-txt').val("");
+            $("#major-txt").val("");
+        });
+        $('#data-tbody').on('click','#btn_delete',function(){
+            var id = $(this).parents('tr').find('td').eq(0).text();
+            for(var i=0;i<obj.length;i++){
+                if(id == obj[i].id){
+                    for(var j=i;j<obj.length-1;j++){
+                        obj[j]=obj[j+1];
+                    }
+                    obj.pop();
+                    alert('delete successfyully..!');
+                    break;
+                }
+            }
+            var str='';
+            for(var i=0;i<obj.length;i++){
+                str+=`
+                <tr>
+                    <td>${obj[i].id}</td> 
+                    <td>${obj[i].name}</td> 
+                    <td>${obj[i].gender}</td> 
+                    <td>${obj[i].major}</td> 
+                    <td>
+                        <button type="button" id="btn_update" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+                        <button id="btn_delete" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr> 
+                `;
+            }
+            $('#data-tbody').html(str);
+            index--;
+        });
+        //update
+        $('#data-tbody').on('click','#btn_update',function(){
+            // get data from table
+            var id     = $(this).parents('tr').find('td').eq(0).text();
+            var name   = $(this).parents('tr').find('td').eq(1).text();
+            var gender = $(this).parents('tr').find('td').eq(2).text();
+            var major  = $(this).parents('tr').find('td').eq(3).text();
+            // alert(id+name+gender+major);
+            // put data into form
+            $('#id-txt').val(id);
+            $('#name-txt').val(name);
+            $('#gender-combo').val(gender);
+            $('#major-txt').val(major);
+        });
+
+        //save change
+        $('#save_change').click(function(){
+            // get id
+            var id1     = $("#id-txt").val();
+            var name1   = $("#name-txt").val();
+            var gender1 = $("#gender-combo").val();
+            var major1  = $("#major-txt").val();
+
+            for(var i=0;i<obj.length;i++){
+                if(id==obj[i].id){
+                    obj[i]={
+                        id:id1,
+                        name:name1,
+                        gender:gender1,
+                        major:major1
+                    }
+                    alert("Update successfully...!");
+                }
+            }
+        })
+    });
+</script>
+</html>
